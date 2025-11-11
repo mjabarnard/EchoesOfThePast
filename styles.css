@@ -264,7 +264,8 @@ body {
 
 .volume-controls {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 8px;
     padding-left: 96px; /* Align with audio-status (play button 80px + gap 16px) */
 }
 
@@ -275,7 +276,8 @@ body {
 }
 
 .volume-control label {
-    display: flex;
+    display: grid;
+    grid-template-columns: 75px 120px;
     align-items: center;
     gap: 8px;
 }
