@@ -378,18 +378,18 @@ body {
 .narration-volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px;
-    height: 10px;
-    background: var(--accent);
+    width: 12px;
+    height: 12px;
+    background: var(--text);
     cursor: pointer;
     border-radius: 50%;
 }
 
 .soundscape-volume-slider::-moz-range-thumb,
 .narration-volume-slider::-moz-range-thumb {
-    width: 10px;
-    height: 10px;
-    background: var(--accent);
+    width: 12px;
+    height: 12px;
+    background: var(--text);
     cursor: pointer;
     border-radius: 50%;
     border: none;
