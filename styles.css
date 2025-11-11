@@ -262,11 +262,16 @@ body {
     gap: 16px;
 }
 
+.volume-controls {
+    display: flex;
+    gap: 20px;
+    padding-left: 96px; /* Align with audio-status (play button 80px + gap 16px) */
+}
+
 .volume-control {
     font-size: 11px;
     color: var(--text-light);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    padding-left: 96px; /* Align with audio-status (play button 80px + gap 16px) */
 }
 
 .volume-control label {
@@ -355,8 +360,9 @@ body {
     border: none;
 }
 
-/* Volume slider */
-.volume-slider {
+/* Volume sliders */
+.soundscape-volume-slider,
+.narration-volume-slider {
     width: 120px;
     height: 3px;
     -webkit-appearance: none;
@@ -366,7 +372,8 @@ body {
     border-radius: 2px;
 }
 
-.volume-slider::-webkit-slider-thumb {
+.soundscape-volume-slider::-webkit-slider-thumb,
+.narration-volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 10px;
@@ -376,7 +383,8 @@ body {
     border-radius: 50%;
 }
 
-.volume-slider::-moz-range-thumb {
+.soundscape-volume-slider::-moz-range-thumb,
+.narration-volume-slider::-moz-range-thumb {
     width: 10px;
     height: 10px;
     background: var(--accent);
@@ -715,12 +723,18 @@ body {
         min-width: 0;
     }
 
-    .volume-control {
-        font-size: 9px;
+    .volume-controls {
+        flex-direction: column;
+        gap: 8px;
         padding-left: 58px; /* Align with audio-status on mobile (play button 50px + gap 8px) */
     }
 
-    .volume-slider {
+    .volume-control {
+        font-size: 9px;
+    }
+
+    .soundscape-volume-slider,
+    .narration-volume-slider {
         width: 80px;
     }
 
@@ -751,7 +765,8 @@ body {
         gap: 12px;
     }
 
-    .volume-slider,
+    .soundscape-volume-slider,
+    .narration-volume-slider,
     .rotation-slider {
         width: 120px;
     }

@@ -40,7 +40,8 @@ export class AudioPlayer {
         this.seekSlider = container.querySelector('.seek-slider');
         this.currentTimeEl = container.querySelector('.current-time');
         this.durationEl = container.querySelector('.duration');
-        this.volumeSlider = container.querySelector('.volume-slider');
+        this.soundscapeVolumeSlider = container.querySelector('.soundscape-volume-slider');
+        this.narrationVolumeSlider = container.querySelector('.narration-volume-slider');
 
         // Rotary control
         this.rotaryControl = new RotaryControl(
@@ -58,7 +59,8 @@ export class AudioPlayer {
         this.seekSlider.addEventListener('change', async (e) => await this._handleSeek(e));
         this.seekSlider.addEventListener('input', (e) => this._updateSeekDisplay(e));
         this.seekSlider.addEventListener('click', (e) => this._handleSeekClick(e));
-        this.volumeSlider.addEventListener('input', (e) => this._handleVolume(e));
+        this.soundscapeVolumeSlider.addEventListener('input', (e) => this._handleSoundscapeVolume(e));
+        this.narrationVolumeSlider.addEventListener('input', (e) => this._handleNarrationVolume(e));
     }
 
     async togglePlayPause() {
@@ -140,12 +142,14 @@ export class AudioPlayer {
         this._cleanup();
 
         // Create gain nodes
+        // Apply 3dB boost to ambisonic (3dB = 10^(3/20) ≈ 1.413)
         this.ambisonicGain = this.audioContext.createGain();
-        this.ambisonicGain.gain.value = this.volumeSlider.value / 100;
+        const soundscapeVolume = this.soundscapeVolumeSlider.value / 100;
+        this.ambisonicGain.gain.value = soundscapeVolume * 1.413;
 
         if (this.narrationBuffer) {
             this.narrationGain = this.audioContext.createGain();
-            this.narrationGain.gain.value = this.volumeSlider.value / 100;
+            this.narrationGain.gain.value = this.narrationVolumeSlider.value / 100;
         }
 
         // Create and start sources
@@ -376,11 +380,16 @@ export class AudioPlayer {
         await this._handleSeek({ target: { value: seekTime } });
     }
 
-    _handleVolume(e) {
+    _handleSoundscapeVolume(e) {
         const volume = parseFloat(e.target.value) / 100;
         if (this.ambisonicGain) {
-            this.ambisonicGain.gain.value = volume;
+            // Apply 3dB boost to ambisonic (3dB = 10^(3/20) ≈ 1.413)
+            this.ambisonicGain.gain.value = volume * 1.413;
         }
+    }
+
+    _handleNarrationVolume(e) {
+        const volume = parseFloat(e.target.value) / 100;
         if (this.narrationGain) {
             this.narrationGain.gain.value = volume;
         }
