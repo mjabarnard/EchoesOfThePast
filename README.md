@@ -21,13 +21,6 @@ What happens when a building that holds meaning for a community is demolished? I
 4. **Underwater Feats** - Captain Matthew Webb's legendary swim
 5. **The Grotto** - Picturesque rock walls and the tram crash of 1925
 
-## Technology
-
-- HTML5, CSS3, JavaScript
-- Web Audio API for ambisonic decoding
-- JSAmbisonics library for spatial audio
-- Opus format for efficient audio delivery
-
 ## Credits
 
 **Created by Dr Kevin Corstorphine and Dr Matt Barnard**
